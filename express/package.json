@@ -1,0 +1,28 @@
+{
+  "name": "express-to-aws-lambda",
+  "version": "1.0.0",
+  "description": "Example express app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johncmckim/express-to-aws-lambda.git"
+  },
+  "keywords": [
+    "express",
+    "aws",
+    "lambda"
+  ],
+  "author": "John McKim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johncmckim/express-to-aws-lambda/issues"
+  },
+  "homepage": "https://github.com/johncmckim/express-to-aws-lambda#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "promise": "^7.1.1"
+  }
+}

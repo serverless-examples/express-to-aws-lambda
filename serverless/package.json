@@ -1,0 +1,15 @@
+{
+  "name": "express-to-aws-lambda",
+  "version": "0.0.1",
+  "description": "A Serverless Project and its Serverless Plugin dependencies.",
+  "author": "me",
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/"
+  },
+  "dependencies": {
+    "promise": "^7.1.1"
+  }
+}

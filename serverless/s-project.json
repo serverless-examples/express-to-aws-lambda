@@ -1,0 +1,7 @@
+{
+  "name": "express-to-aws-lambda",
+  "custom": {},
+  "plugins": [
+    "serverless-offline"
+  ]
+}
