@@ -28,5 +28,7 @@ exports.post = function(name) {
     name: name
   };
 
+  foos[foo.id] = foo;
+
   return Promise.resolve(foo);
 }
