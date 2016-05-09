@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/johncmckim/express-to-aws-lambda#readme",
   "dependencies": {
+    "body-parser": "^1.15.1",
     "express": "^4.13.4",
-    "promise": "^7.1.1"
+    "promise": "^7.1.1",
+    "shortid": "^2.2.6"
   }
 }
