@@ -6,6 +6,10 @@ var fooService = require('./foo');
 var app = express();
 
 app.use(bodyParser.json()); // Parse JSON
+app.use(function (req, res, next) {
+  console.log('Express: ' + req.method + ' ' + req.path)
+  next();
+});
 
 app.get('/foo/:id', function (req, res) {
   var id = req.params.id;
