@@ -10,6 +10,7 @@ exports.put = function(id, name) {
   return cache.getObject(id)
     .then(function(foo) {
       foo.name = name;
+      foo.lastUpdated = new Date();
       return cache.setObject(id, foo);
     });
 }
@@ -19,6 +20,7 @@ exports.post = function(name) {
 
   return cache.setObject(id, {
     id: id,
-    name: name
+    name: name,
+    lastUpdated: new Date()
   });
 }

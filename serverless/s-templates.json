@@ -14,7 +14,9 @@
     },
     "default": {
       "statusCode": "200",
-      "responseParameters": {},
+      "responseParameters": {
+        "method.response.header.X-Frame-Options": "DENY"
+      },
       "responseModels": {
         "application/json;charset=UTF-8": "Empty"
       },

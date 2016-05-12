@@ -1,6 +1,10 @@
 var APIeasy = require('api-easy'),
     assert = require('assert');
 
+function checkHeaders(res) {
+  assert.ok(res.headers['last-modified'], 'Last-Modified not set');
+  assert.equal(res.headers['x-frame-options'], 'DENY', 'X-Frame-Options not set');
+}
 
 function createApiTests(type, port) {
   var suite = APIeasy.describe(type + ' API tests');
@@ -16,12 +20,13 @@ function createApiTests(type, port) {
   suite
     .post('/foo', { name: fooName })
       .expect(200)
-      .expect('should respond with id', function (err, res, body) {
+      .expect('should create foo', function (err, res, body) {
         if(err) return;
+        checkHeaders(res);
 
         var result = JSON.parse(body);
         assert.ok(result.id, 'No id is set on the response');
-        assert.equal(result.name, fooName, 'Name was not set');
+        assert.equal(result.name, fooName);
 
         suite.before('setId', function (outgoing) {
           outgoing.uri = outgoing.uri.replace(':id', result.id);
@@ -31,8 +36,9 @@ function createApiTests(type, port) {
     .next()
     .get('/foo/:id')
       .expect(200)
-      .expect('should respond with id', function (err, res, body) {
+      .expect('should get created foo', function (err, res, body) {
         if(err || res.statusCode !== 200) return;
+        checkHeaders(res);
 
         var result = JSON.parse(body);
         assert.ok(result.id, 'No id is set on the response');
@@ -41,8 +47,9 @@ function createApiTests(type, port) {
     .next()
     .put('/foo/:id', { name: updatedFooName })
       .expect(200)
-      .expect('should respond with id', function (err, res, body) {
+      .expect('should update foo', function (err, res, body) {
         if(err || res.statusCode !== 200) return;
+        checkHeaders(res);
 
         var result = JSON.parse(body);
         assert.ok(result.id);

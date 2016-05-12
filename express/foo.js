@@ -19,13 +19,16 @@ exports.put = function(id, name) {
   }
 
   foo.name = name;
+  foo.lastUpdated = new Date();
+
   return Promise.resolve(foo);
 }
 
 exports.post = function(name) {
   var foo = {
     id: shortid.generate(),
-    name: name
+    name: name,
+    lastUpdated: new Date()
   };
 
   foos[foo.id] = foo;

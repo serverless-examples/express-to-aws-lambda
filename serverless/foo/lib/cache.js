@@ -7,10 +7,12 @@ exports.getObject = function(key) {
     client.get(key, function(err, val) {
       if(err) {
         reject(err);
-      } else {
+      } else if(val) {
         var item = JSON.parse(val.toString());
         resolve(item);
-      };
+      } else {
+        resolve(null);
+      }
     });
   });
 }

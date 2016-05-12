@@ -10,6 +10,7 @@
     "url": "git://github.com/"
   },
   "dependencies": {
+    "dateformat": "^1.0.12",
     "memjs": "^0.10.0",
     "promise": "^7.1.1",
     "shortid": "^2.2.6"

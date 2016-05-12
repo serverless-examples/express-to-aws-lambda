@@ -23,6 +23,8 @@
   "homepage": "https://github.com/johncmckim/express-to-aws-lambda#readme",
   "dependencies": {
     "body-parser": "^1.15.1",
+    "cors": "^2.7.1",
+    "dateformat": "^1.0.12",
     "express": "^4.13.4",
     "promise": "^7.1.1",
     "shortid": "^2.2.6"
