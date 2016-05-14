@@ -2,6 +2,7 @@ var APIeasy = require('api-easy'),
     assert = require('assert');
 
 function checkHeaders(res) {
+  //console.log(res.headers)
   assert.ok(res.headers['last-modified'], 'Last-Modified not set');
   assert.equal(res.headers['x-frame-options'], 'DENY', 'X-Frame-Options not set');
 }

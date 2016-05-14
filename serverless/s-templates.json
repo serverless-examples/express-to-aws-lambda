@@ -15,13 +15,14 @@
     "default": {
       "statusCode": "200",
       "responseParameters": {
-        "method.response.header.X-Frame-Options": "DENY"
+        "method.response.header.X-Frame-Options": "DENY",
+        "method.response.header.Last-Modified": "integration.response.body.lastModifiedHeader"
       },
       "responseModels": {
         "application/json;charset=UTF-8": "Empty"
       },
       "responseTemplates": {
-        "application/json;charset=UTF-8": ""
+        "application/json;charset=UTF-8": "$input.json('model')"
       }
     }
   }
