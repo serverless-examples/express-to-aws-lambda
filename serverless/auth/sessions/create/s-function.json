@@ -1,5 +1,5 @@
 {
-  "name": "create",
+  "name": "session-create",
   "runtime": "nodejs4.3",
   "description": "Serverless Lambda function for project: express-to-aws-lambda",
   "customName": false,
@@ -13,22 +13,20 @@
   },
   "endpoints": [
     {
-      "path": "create",
-      "method": "GET",
+      "path": "sessions/create",
+      "method": "POST",
       "type": "AWS",
       "authorizationType": "none",
       "authorizerFunction": false,
       "apiKeyRequired": false,
       "requestParameters": {},
-      "requestTemplates": {
-        "application/json": ""
-      },
+      "requestTemplates": "$${apiGatewayRequestTemplate}",
       "responses": {
         "400": {
           "statusCode": "400"
         },
         "default": {
-          "statusCode": "200",
+          "statusCode": "201",
           "responseParameters": {},
           "responseModels": {
             "application/json;charset=UTF-8": "Empty"

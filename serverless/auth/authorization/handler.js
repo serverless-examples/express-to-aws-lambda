@@ -1,6 +1,6 @@
 'use strict';
 var jwt = require('jsonwebtoken'),
-    config = require('./config');
+    config = require('../../config');
 
 //TODO https://aws.amazon.com/blogs/compute/introducing-custom-authorizers-in-amazon-api-gateway/
 

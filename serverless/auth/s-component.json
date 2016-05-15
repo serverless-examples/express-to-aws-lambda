@@ -1,0 +1,10 @@
+{
+  "name": "auth",
+  "runtime": "nodejs4.3",
+  "custom": {
+    "cors": {
+      "allowOrigin": "*",
+      "allowHeaders": ["Content-Type"]
+    }
+  }
+}
