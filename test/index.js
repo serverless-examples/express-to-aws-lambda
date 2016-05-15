@@ -1,5 +1,6 @@
 var APIeasy = require('api-easy'),
-    assert = require('assert');
+    assert = require('assert'),
+    config = require('./config.json');
 
 function checkHeaders(res) {
   //console.log(res.headers)
@@ -19,6 +20,20 @@ function createApiTests(type, port) {
   var updatedFooName = 'updated-test';
 
   suite
+    .post('/sessions/create', { username: 'gonto', password: 'gonto' })
+      .expect(201)
+      .expect('should create session', function (err, res, body) {
+        if(err) return;
+
+        var result = JSON.parse(body);
+        assert.ok(result.id_token, 'No id_token is set on the response');
+
+        suite.before('setToken', function (outgoing) {
+          outgoing.headers['authorization'] = 'Bearer ' + result.id_token;
+          return outgoing;
+        });
+      })
+    .next()
     .post('/foo', { name: fooName })
       .expect(200)
       .expect('should create foo', function (err, res, body) {
@@ -33,7 +48,7 @@ function createApiTests(type, port) {
           outgoing.uri = outgoing.uri.replace(':id', result.id);
           return outgoing;
         });
-     })
+      })
     .next()
     .get('/foo/:id')
       .expect(200)
@@ -62,4 +77,4 @@ function createApiTests(type, port) {
  }
 
 createApiTests('Express', 5000)
-createApiTests('Lambda', 3000)
+//createApiTests('Lambda', 3000)
