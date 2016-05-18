@@ -1,7 +1,7 @@
 var jwt    = require('jsonwebtoken'),
     _      = require('lodash'),
-    config = require('../../config');
+    config = require('../config');
 
-export.createToken = function(user) {
+exports.createToken = function(user) {
   return jwt.sign(_.omit(user, 'password'), config.auth.secret, { expiresIn: 60*60*5 });
 }

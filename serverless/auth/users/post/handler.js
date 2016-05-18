@@ -12,9 +12,9 @@ module.exports.handler = function(event, context, cb) {
   }
 
   users.create(username, password, event.body.extra)
-    .then(function(profile) {
+    .then(function(user) {
       cb(null, {
-        id_token: token.createToken(profile)
+        id_token: token.createToken(user)
       });
     })
     .catch(function(err) {

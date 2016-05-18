@@ -9,11 +9,7 @@ var express = require('express'),
 var app = module.exports = express.Router();
 
 // XXX: This should be a database of users :).
-var users = [{
-  id: 1,
-  username: 'gonto',
-  password: 'gonto'
-}];
+var users = [];
 
 function createToken(user) {
   return jwt.sign(_.omit(user, 'password'), config.auth.secret, { expiresIn: 60*60*5 });

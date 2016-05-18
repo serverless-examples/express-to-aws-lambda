@@ -18,9 +18,19 @@ function createApiTests(type, port) {
   // create foo
   var fooName = 'test';
   var updatedFooName = 'updated-test';
+  var user = { username: 'gonto', password: 'gonto' };
 
   suite
-    .post('/sessions/create', { username: 'gonto', password: 'gonto' })
+    .post('/users', user)
+      .expect(201)
+      .expect('should create user', function (err, res, body) {
+        if(err) return;
+
+        var result = JSON.parse(body);
+        assert.ok(result.id_token, 'No id_token is set on the response');
+      })
+    .next()
+    .post('/sessions/create', user)
       .expect(201)
       .expect('should create session', function (err, res, body) {
         if(err) return;
@@ -76,5 +86,5 @@ function createApiTests(type, port) {
     .export(module);
  }
 
-createApiTests('Express', 5000)
-//createApiTests('Lambda', 3000)
+//createApiTests('Express', 5000)
+createApiTests('Lambda', 3000)

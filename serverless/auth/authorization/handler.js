@@ -1,6 +1,6 @@
 'use strict';
 var jwt = require('jsonwebtoken'),
-    config = require('../../config');
+    config = require('../config');
 
 //TODO https://aws.amazon.com/blogs/compute/introducing-custom-authorizers-in-amazon-api-gateway/
 
@@ -8,7 +8,9 @@ module.exports.handler = function(event, context, cb) {
   console.log('Client token: ' + event.authorizationToken);
   console.log('Method ARN: ' + event.methodArn);
 
-  jwt.verify(token, secret, options, function(err, verifiedJwt) {
+  cb(null, {});
+  /*
+  jwt.verify(event.authorizationToken, secret, options, function(err, verifiedJwt) {
     if(err) {
       console.log(err);
       cb("Unauthorized");
@@ -33,4 +35,5 @@ module.exports.handler = function(event, context, cb) {
 
     cb(null, policy.build());
   });
+  */
 };
