@@ -21,6 +21,13 @@ function createApiTests(type, port) {
   var user = { username: 'gonto', password: 'gonto' };
 
   suite
+    .post('/foo', { name: fooName })
+      .expect(401)
+    .get('/foo/adfjk')
+      .expect(401)
+    .put('/foo/adfjk')
+      .expect(401)
+    .next()
     .post('/users', user)
       .expect(201)
       .expect('should create user', function (err, res, body) {
