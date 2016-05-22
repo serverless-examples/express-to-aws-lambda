@@ -20,7 +20,7 @@ function createApiTests(type, port) {
 
   suite
     .post('/foo', { name: fooName })
-      .expect(200)
+      .expect(201)
       .expect('should create foo', function (err, res, body) {
         if(err) return;
         checkHeaders(res);

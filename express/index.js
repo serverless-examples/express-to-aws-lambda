@@ -57,7 +57,7 @@ app.post('/foo', function (req, res) {
     .post(name)
     .then(function(foo) {
       setLastModified(res, foo);
-      res.status(200).send(foo);
+      res.status(201).send(foo);
     })
     .catch(function (err) {
       res.status(500).send();
