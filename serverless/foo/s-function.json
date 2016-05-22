@@ -21,7 +21,7 @@
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": "$${apiGatewayRequestTemplate}",
-      "responses": "$${apiGatewayResponseTemplate}"
+      "responses": "$${successResponse}"
     },{
       "path": "foo",
       "method": "POST",
@@ -31,7 +31,7 @@
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": "$${apiGatewayRequestTemplate}",
-      "responses": "$${apiGatewayResponseTemplate}"
+      "responses": "$${createdResponse}"
     },{
       "path": "foo/{id}",
       "method": "PUT",
@@ -41,7 +41,7 @@
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": "$${apiGatewayRequestTemplate}",
-      "responses": "$${apiGatewayResponseTemplate}"
+      "responses": "$${successResponse}"
     }
   ],
   "events": [],

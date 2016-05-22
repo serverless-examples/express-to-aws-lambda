@@ -8,22 +8,36 @@
       "queryParams" : "$input.params().querystring"
     }
   },
-  "apiGatewayResponseTemplate": {
+  "successResponseParameters": {
+    "method.response.header.X-Frame-Options": "DENY",
+    "method.response.header.Last-Modified": "integration.response.body.lastModifiedHeader"
+  },
+  "successResponseModels": {
+    "application/json;charset=UTF-8": "Empty"
+  },
+  "successResponseTemplates": {
+    "application/json;charset=UTF-8": "$input.json('model')"
+  },
+  "createdResponse": {
+    "400": {
+      "statusCode": "400"
+    },
+    "default": {
+      "statusCode": "201",
+      "responseParameters": "$${successResponseParameters}",
+      "responseModels": "$${successResponseModels}",
+      "responseTemplates": "$${successResponseTemplates}"
+    }
+  },
+  "successResponse": {
     "400": {
       "statusCode": "400"
     },
     "default": {
       "statusCode": "200",
-      "responseParameters": {
-        "method.response.header.X-Frame-Options": "DENY",
-        "method.response.header.Last-Modified": "integration.response.body.lastModifiedHeader"
-      },
-      "responseModels": {
-        "application/json;charset=UTF-8": "Empty"
-      },
-      "responseTemplates": {
-        "application/json;charset=UTF-8": "$input.json('model')"
-      }
+      "responseParameters": "$${successResponseParameters}",
+      "responseModels": "$${successResponseModels}",
+      "responseTemplates": "$${successResponseTemplates}"
     }
   }
 }
