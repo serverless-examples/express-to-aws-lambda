@@ -8,7 +8,7 @@ function checkHeaders(res) {
   assert.equal(res.headers['x-frame-options'], 'DENY', 'X-Frame-Options not set');
 }
 
-function createApiTests(type, port) {
+function createApiTests(type, port, unauthorizedStatusCode) {
   var suite = APIeasy.describe(type + ' API tests');
 
   suite.discuss('When using the ' + type + ' API')
@@ -22,11 +22,11 @@ function createApiTests(type, port) {
 
   suite
     .post('/foo', { name: fooName })
-      .expect(401)
+      .expect(unauthorizedStatusCode)
     .get('/foo/adfjk')
-      .expect(401)
+      .expect(unauthorizedStatusCode)
     .put('/foo/adfjk')
-      .expect(401)
+      .expect(unauthorizedStatusCode)
     .next()
     .post('/users', user)
       .expect(201)
@@ -93,5 +93,5 @@ function createApiTests(type, port) {
     .export(module);
  }
 
-//createApiTests('Express', 5000)
-createApiTests('Lambda', 3000)
+createApiTests('Express', 5000, 401)
+createApiTests('Lambda', 3000, 403)

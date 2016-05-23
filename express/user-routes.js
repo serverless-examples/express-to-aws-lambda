@@ -28,7 +28,8 @@ app.post('/users', function(req, res) {
   }
 
   var profile = _.pick(req.body, 'username', 'password', 'extra');
-  profile.id = _.max(users, 'id').id + 1;
+  var maxUser = _.max(users, 'id');
+  profile.id = maxUser ? (maxUser.id + 1) : 1;
 
   users.push(profile);
 
