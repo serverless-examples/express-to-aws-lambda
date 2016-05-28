@@ -5,14 +5,14 @@ var jwt = require('jsonwebtoken'),
 
 //TODO https://aws.amazon.com/blogs/compute/introducing-custom-authorizers-in-amazon-api-gateway/
 
-module.exports.handler = function(event, context, cb) {
+module.exports.handler = function(event, context, callback) {
   var options = {};
-
+  console.log('Event: ', event);
+  
   jwt.verify(event.authorizationToken, config.auth.secret, options, function(err, verifiedJwt) {
     if(err) {
       console.log(err);
-      cb("Unauthorized");
-      return;
+      return context.fail("Unauthorized");
     }
 
     // parse the ARN from the incoming event
@@ -31,6 +31,6 @@ module.exports.handler = function(event, context, cb) {
     //policy.allowMethod(AuthPolicy.HttpVerb.GET, "*");
     //policy.allowMethod(AuthPolicy.HttpVerb.POST, "/users/" + verifiedJwt.body.sub);
 
-    cb(null, policy.build());
+    context.done(null, policy.build());
   });
 };

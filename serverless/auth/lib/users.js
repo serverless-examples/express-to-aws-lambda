@@ -1,18 +1,21 @@
-var Promise = require('Promise');
 var shortid = require('shortid');
 var cache = require('./cache');
 
-exports.getByUsername = function(username) {
-  return cache.getObject(username);
+exports.getByUsername = function(username, cb) {
+  console.log('Getting user: ', username);
+  cache.getObject(username, cb);
 }
 
-exports.create = function(username, password, extra) {
+exports.create = function(username, password, extra, cb) {
   var id = shortid.generate();
-
-  return cache.setObject(username, {
+  var user = {
     id: id,
     username: username,
     password: password,
     lastUpdated: new Date()
-  });
+  };
+
+  console.log('Creating user', user);
+
+  cache.setObject(username, user, cb);
 }

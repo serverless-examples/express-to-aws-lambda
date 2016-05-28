@@ -1,26 +1,26 @@
-var Promise = require('Promise');
 var shortid = require('shortid');
 var cache = require('./cache');
 
-exports.get = function(id) {
-  return cache.getObject(id);
+exports.get = function(id, cb) {
+  cache.getObject(id, cb);
 }
 
-exports.put = function(id, name) {
-  return cache.getObject(id)
-    .then(function(foo) {
-      foo.name = name;
-      foo.lastUpdated = new Date();
-      return cache.setObject(id, foo);
-    });
+exports.put = function(id, name, cb) {
+  cache.getObject(id, function(foo) {
+    if(err) cb(err);
+
+    foo.name = name;
+    foo.lastUpdated = new Date();
+    cache.setObject(id, foo, cb);
+  });
 }
 
-exports.post = function(name) {
+exports.post = function(name, cb) {
   var id = shortid.generate();
-
-  return cache.setObject(id, {
+  var foo = {
     id: id,
     name: name,
     lastUpdated: new Date()
-  });
+  };
+  cache.setObject(id, foo, cb);
 }

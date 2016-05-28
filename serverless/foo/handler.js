@@ -3,57 +3,34 @@
 var dateFormat = require('dateFormat');
 var fooService = require('./lib/foo');
 
-function successFactory(cb) {
-  return function(foo) {
+function callbackFactory(context, callback) {
+  return function(err, foo) {
+    if(err) context.fail(err);
+
     var lastModifiedHeader = dateFormat(foo.lastModified, "ddd, dd mmmm yyyy, h:MM:ss Z");
-    cb(null, {
+    var result = {
       lastModifiedHeader: lastModifiedHeader,
       model: foo
-    });
+    };
+    context.done(null, result);
   }
 }
 
-function errorFactory(cb) {
-  return function (err) {
-    cb(err);
-  }
-}
-
-function get(event, context, cb) {
-  fooService
-    .get(event.id)
-    .then(successFactory(cb))
-    .catch(errorFactory(cb));
-}
-
-function post(event, context, cb) {
-  fooService
-    .post(event.body.name)
-    .then(successFactory(cb))
-    .catch(errorFactory(cb));
-}
-
-function put(event, context, cb) {
-  fooService
-    .put(event.id, event.body.name)
-    .then(successFactory(cb))
-    .catch(errorFactory(cb));
-}
-
-module.exports.crudFoo = function(event, context, cb) {
-
+module.exports.crudFoo = function(event, context, callback) {
   switch(event.http_method) {
     case 'GET':
-      get(event, context, cb);
+      fooService
+        .get(event.id, callbackFactory(context, callback));
       break;
     case 'PUT':
-      put(event, context, cb);
+      fooService.put(event.id, event.body.name, callbackFactory(context, callback));
       break;
     case 'POST':
-      post(event, context, cb);
+      fooService
+        .post(event.body.name, callbackFactory(context, callback))
       break;
     default:
-      cb('Not implemented');
+      context.fail('Not implemented');
+      break;
   }
-
 };

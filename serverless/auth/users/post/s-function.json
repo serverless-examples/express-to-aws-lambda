@@ -4,11 +4,16 @@
   "description": "Serverless Lambda function for project: express-to-aws-lambda",
   "customName": false,
   "customRole": false,
-  "handler": "handler.handler",
-  "timeout": 6,
-  "memorySize": 1024,
+  "handler": "auth/users/post/handler.handler",
+  "timeout": 3,
+  "memorySize": 256,
   "authorizer": {},
   "custom": {
+    "optimize": {
+      "includePaths": [
+        "auth/lib"
+      ]
+    },
     "excludePatterns": []
   },
   "endpoints": [
@@ -39,13 +44,6 @@
     }
   ],
   "events": [],
-  "environment": {
-    "SERVERLESS_PROJECT": "${project}",
-    "SERVERLESS_STAGE": "${stage}",
-    "SERVERLESS_REGION": "${region}"
-  },
-  "vpc": {
-    "securityGroupIds": [],
-    "subnetIds": []
-  }
+  "environment": "$${functionEnvironment}",
+  "vpc": "$${functionVpc}"
 }

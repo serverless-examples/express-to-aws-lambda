@@ -1,4 +1,14 @@
 {
+  "functionEnvironment": {
+    "SERVERLESS_PROJECT": "${project}",
+    "SERVERLESS_STAGE": "${stage}",
+    "SERVERLESS_REGION": "${region}",
+    "MEMCACHIER_SERVERS": "${elastiCacheAddress}:${elastiCachePort}"
+  },
+  "functionVpc": {
+    "securityGroupIds": ["${lambdaExecSecurityGroup}"],
+    "subnetIds": ["${subnetAPrivate}"]
+  },
   "apiGatewayRequestTemplate": {
     "application/json": {
       "http_method" : "$context.httpMethod",
