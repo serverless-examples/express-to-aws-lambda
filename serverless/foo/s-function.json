@@ -45,13 +45,6 @@
     }
   ],
   "events": [],
-  "environment": {
-    "SERVERLESS_PROJECT": "${project}",
-    "SERVERLESS_STAGE": "${stage}",
-    "SERVERLESS_REGION": "${region}"
-  },
-  "vpc": {
-    "securityGroupIds": [],
-    "subnetIds": []
-  }
+  "environment": "$${functionEnvironment}",
+  "vpc": "$${functionVpc}"
 }
