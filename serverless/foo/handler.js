@@ -12,22 +12,24 @@ function callbackFactory(context, callback) {
       lastModifiedHeader: lastModifiedHeader,
       model: foo
     };
+
+    console.log('Returning result: ', result);
     context.done(null, result);
   }
 }
 
 module.exports.crudFoo = function(event, context, callback) {
+  console.log('Event: ', event);
+
   switch(event.http_method) {
     case 'GET':
-      fooService
-        .get(event.id, callbackFactory(context, callback));
+      fooService.get(event.id, callbackFactory(context, callback));
       break;
     case 'PUT':
       fooService.put(event.id, event.body.name, callbackFactory(context, callback));
       break;
     case 'POST':
-      fooService
-        .post(event.body.name, callbackFactory(context, callback))
+      fooService.post(event.body.name, callbackFactory(context, callback))
       break;
     default:
       context.fail('Not implemented');

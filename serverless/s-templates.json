@@ -19,7 +19,7 @@
     }
   },
   "successResponseParameters": {
-    "method.response.header.X-Frame-Options": "DENY",
+    "method.response.header.X-Frame-Options": "'DENY'",
     "method.response.header.Last-Modified": "integration.response.body.lastModifiedHeader"
   },
   "successResponseModels": {

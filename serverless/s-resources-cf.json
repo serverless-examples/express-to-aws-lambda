@@ -44,17 +44,59 @@
               "Action": [
                 "ec2:CreateNetworkInterface",
                 "ec2:DescribeNetworkInterfaces",
+                "ec2:DetachNetworkInterface",
                 "ec2:DeleteNetworkInterface"
               ],
               "Resource": "*"
             }
           ]
         },
-        "Roles": [
-          {
-            "Ref": "IamRoleLambda"
-          }
-        ]
+        "Roles": [{
+          "Ref": "IamRoleLambda"
+        }]
+      }
+    },
+    "IamRoleAPIGateway": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "apigateway.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "Path": "/"
+      }
+    },
+    "IamPolicyAPIGateway": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "${stage}-${project}-api-gateway",
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "lambda:InvokeFunction"
+              ],
+              "Resource": "*"
+            }
+          ]
+        },
+        "Roles": [{
+            "Ref": "IamRoleAPIGateway"
+        }]
       }
     },
     "VPC": {

@@ -99,5 +99,5 @@ function createApiTests(type, host, port, path, secure, unauthorizedStatusCode) 
     .export(module);
  }
 
-createApiTests('Express', 'localhost', 5000, '', false, 401)
-createApiTests('Lambda', 'localhost', 3000, '', false, 403)
+//createApiTests('Express', 'localhost', 5000, '', false, 401)
+//createApiTests('Lambda', 'localhost', 3000, '', false, 403)

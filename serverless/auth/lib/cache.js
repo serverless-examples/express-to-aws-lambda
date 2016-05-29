@@ -32,8 +32,8 @@ exports.setObject = function(key, obj, cb) {
       console.log('Set failed', err);
       cb(err);
     } else {
-      console.log('Get succeeded', stored);
-      cb(null, stored);
+      console.log('Get succeeded', obj);
+      cb(null, obj);
     }
   }, 600);
 }
