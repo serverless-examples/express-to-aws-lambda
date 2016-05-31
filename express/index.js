@@ -1,25 +1,25 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var jackrabbit = require('jackrabbit');
+
+var TASK_QUEUE_KEY = 'task_queue';
+var RABBIT_URL = process.env.RABBIT_URL || 'amqp://localhost'
+
+var rabbit = jackrabbit(RABBIT_URL);
+var exchange = rabbit.default();
 
 var app = express();
 
 app.use(bodyParser.json());
-
 app.use(function (req, res, next) {
-  res.setHeader("X-Frame-Options", "DENY");
+  console.log('Express: ' + req.method + ' ' + req.path)
   next();
 });
 
-app.use(function (req, res, next) {
-  console.log('Express: ' + req.method + ' ' + req.path);
-  //if(req.headers['authorization']) {
-  //  console.log('  using Authorization Header: ' + req.headers['authorization'])
-  //}
-  next();
+app.post('/jobs', function(req, res) {
+    exchange.publish(req.body.name, { key: TASK_QUEUE_KEY });
+    res.status(201).send();
 });
-
-app.use(require('./foo-routes'));
-app.use(require('./user-routes'));
 
 var port = process.env.PORT || 5000;
 

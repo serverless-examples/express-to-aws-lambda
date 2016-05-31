@@ -290,44 +290,6 @@
               "Value": "LambdaExecSecurityGroup"
             }]
         }
-    },
-    "ElastiCacheSg": {
-      "Type" : "AWS::EC2::SecurityGroup",
-      "Properties" : {
-         "GroupDescription" : "SG for Elastic Cache",
-         "VpcId" : {"Ref": "VPC"},
-         "Tags" :  [{
-           "Key": "Name",
-           "Value": "ElastiCacheSg"
-         }],
-         "SecurityGroupIngress" : [{
-            "IpProtocol" : "tcp",
-            "FromPort" : "11211",
-            "ToPort" : "11211",
-            "SourceSecurityGroupId" : { "Ref" : "LambdaExecSecurityGroup" }
-        }]
-      }
-    },
-    "ElastiCacheSubnetGroup" : {
-      "Type" : "AWS::ElastiCache::SubnetGroup",
-      "Properties" : {
-        "Description" : "ElastiCache Subnet Group",
-        "SubnetIds" : [ { "Ref": "SubnetAPrivate" } ]
-      }
-    },
-    "ElastiCache": {
-      "Type": "AWS::ElastiCache::CacheCluster",
-      "Properties": {
-        "Engine" : "memcached",
-        "CacheNodeType" : "cache.t2.micro",
-        "AZMode": "single-az",
-        "NumCacheNodes" : "1",
-        "CacheSubnetGroupName": { "Ref": "ElastiCacheSubnetGroup" },
-        "PreferredAvailabilityZones": [
-          {"Fn::Select": ["0", {"Fn::GetAZs": ""}]}
-        ],
-        "VpcSecurityGroupIds": [{"Ref": "ElastiCacheSg"}]
-       }
     }
   },
   "Outputs": {
@@ -360,18 +322,6 @@
     "LambdaExecSecurityGroup": {
       "Description": "Route table public.",
       "Value": {"Ref": "LambdaExecSecurityGroup"}
-    },
-    "ElastiCacheAddress": {
-      "Description":"The endpoint for the elastic cache cluster",
-      "Value":{
-        "Fn::GetAtt": [ "ElastiCache", "ConfigurationEndpoint.Address" ]
-      }
-    },
-    "ElastiCachePort": {
-      "Description": "Port of the elastic cache",
-      "Value": {
-        "Fn::GetAtt": [ "ElastiCache", "ConfigurationEndpoint.Port" ]
-      }
     }
   }
 }

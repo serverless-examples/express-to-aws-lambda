@@ -1,5 +1,5 @@
 {
-  "name": "express-to-aws-lambda-part-4",
+  "name": "express-to-aws-lambda-part-5",
   "custom": {},
   "plugins": [
     "serverless-optimizer-plugin",
