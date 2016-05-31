@@ -20,7 +20,6 @@ function createApiTests(type, host, port, path, secure, unauthorizedStatusCode) 
     suite.path(path);
   }
 
-
   // create foo
   var fooName = 'test';
   var updatedFooName = 'updated-test';
@@ -99,5 +98,5 @@ function createApiTests(type, host, port, path, secure, unauthorizedStatusCode) 
     .export(module);
  }
 
-//createApiTests('Express', 'localhost', 5000, '', false, 401)
-//createApiTests('Lambda', 'localhost', 3000, '', false, 403)
+createApiTests('Express', 'localhost', 5000, '', false)
+createApiTests('Lambda', 'localhost', 3000, '', false)

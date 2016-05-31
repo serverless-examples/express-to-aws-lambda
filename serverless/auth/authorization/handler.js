@@ -6,6 +6,10 @@ var token = require('../lib/token'),
 
 module.exports.handler = function(event, context, callback) {
   console.log('Event: ', event);
+  if(!event.authorizationToken) {
+    return context.fail('Invalid token');
+  }
+
   var tokenParts = event.authorizationToken.split(' ');
   if(tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
     console.log('Invalid auth token: ', event.authorizationToken);
