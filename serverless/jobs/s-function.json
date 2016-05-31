@@ -1,0 +1,39 @@
+{
+  "name": "jobs",
+  "runtime": "nodejs4.3",
+  "description": "Serverless Lambda function for project: express-to-aws-lambda-part-5",
+  "customName": false,
+  "customRole": false,
+  "handler": "handler.handler",
+  "timeout": 6,
+  "memorySize": 1024,
+  "authorizer": {},
+  "custom": {
+    "excludePatterns": []
+  },
+  "endpoints": [
+    {
+      "path": "jobs",
+      "method": "POST",
+      "type": "AWS",
+      "authorizationType": "none",
+      "authorizerFunction": false,
+      "apiKeyRequired": false,
+      "requestParameters": {},
+      "requestTemplates": "$${apiGatewayRequestTemplate}",
+      "responses": "$${createdResponse}"
+    }
+  ],
+  "events": [],
+  "environment": {
+    "SERVERLESS_PROJECT": "${project}",
+    "SERVERLESS_STAGE": "${stage}",
+    "SERVERLESS_REGION": "${region}",
+    "WORKER_SNS_TOPIC_ARN": "${workerSnsTopicArn}",
+    "WORKER_SNS_TOPIC_NAME": "${workerSnsTopicName}"
+  },
+  "vpc": {
+    "securityGroupIds": [],
+    "subnetIds": []
+  }
+}

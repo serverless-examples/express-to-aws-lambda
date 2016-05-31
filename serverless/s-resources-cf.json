@@ -290,6 +290,12 @@
               "Value": "LambdaExecSecurityGroup"
             }]
         }
+    },
+    "WorkerSnsTopic": {
+      "Type" : "AWS::SNS::Topic",
+      "Properties" : {
+        "DisplayName" : "Worker Topic"
+      }
     }
   },
   "Outputs": {
@@ -322,6 +328,16 @@
     "LambdaExecSecurityGroup": {
       "Description": "Route table public.",
       "Value": {"Ref": "LambdaExecSecurityGroup"}
+    },
+    "WorkerSnsTopicArn": {
+      "Description": "TopicName of the Worker SNS Topic",
+      "Value": { "Ref": "WorkerSnsTopic" }
+    },
+    "WorkerSnsTopicName": {
+      "Description": "TopicName of the Worker SNS Topic",
+      "Value": {
+        "Fn::GetAtt": [ "WorkerSnsTopic", "TopicName" ]
+      }
     }
   }
 }

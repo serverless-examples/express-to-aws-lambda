@@ -1,0 +1,33 @@
+{
+  "name": "worker",
+  "runtime": "nodejs4.3",
+  "description": "Serverless Lambda function for project: express-to-aws-lambda-part-5",
+  "customName": false,
+  "customRole": false,
+  "handler": "handler.handler",
+  "timeout": 6,
+  "memorySize": 1024,
+  "authorizer": {},
+  "custom": {
+    "excludePatterns": []
+  },
+  "endpoints": [],
+  "events": [
+    {
+      "name": "workerEvent",
+      "type": "sns",
+      "config": {
+        "topicName": "${workerSnsTopicName}"
+      }
+    }
+  ],
+  "environment": {
+    "SERVERLESS_PROJECT": "${project}",
+    "SERVERLESS_STAGE": "${stage}",
+    "SERVERLESS_REGION": "${region}"
+  },
+  "vpc": {
+    "securityGroupIds": [],
+    "subnetIds": []
+  }
+}
