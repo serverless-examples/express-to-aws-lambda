@@ -19,4 +19,4 @@ function createApiTests(type, host, port, path, secure) {
  }
 
 createApiTests('Express', 'localhost', 5000, '', false)
-//createApiTests('Lambda', 'localhost', 3000, '', false)
+createApiTests('Lambda', 'nmlu6z34zl.execute-api.us-east-1.amazonaws.com', 443, 'dev', true)

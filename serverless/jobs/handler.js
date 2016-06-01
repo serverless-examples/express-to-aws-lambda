@@ -9,7 +9,6 @@ module.exports.handler = function(event, context, cb) {
 
   var params = {
     Message: JSON.stringify(message),
-    MessageStructure: 'json',
     TopicArn: process.env.WORKER_SNS_TOPIC_ARN
   };
 

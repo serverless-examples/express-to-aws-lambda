@@ -29,6 +29,9 @@
     "application/json;charset=UTF-8": "$input.json('model')"
   },
   "createdResponse": {
+    "Unexpected Error": {
+      "statusCode": "500"
+    },
     "400": {
       "statusCode": "400"
     },
@@ -40,6 +43,9 @@
     }
   },
   "successResponse": {
+    "Unexpected Error": {
+      "statusCode": "500"
+    },
     "400": {
       "statusCode": "400"
     },
