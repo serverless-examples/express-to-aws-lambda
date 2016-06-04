@@ -12,12 +12,14 @@ module.exports.handler = function(event, context, cb) {
     TopicArn: process.env.WORKER_SNS_TOPIC_ARN
   };
 
+  console.log('Publishing job: ', message);
+
   sns.publish(params, function(err, data) {
     if (err) {
       console.log(err, err.stack); // an error occurred
       return context.fail('Unexpected Error')
     } else {
-      console.log(data);           // successful response
+      console.log('Successfully published job: ', data);           // successful response
       return context.succeed({
         job: event.body.name
       });

@@ -2,8 +2,7 @@
   "functionEnvironment": {
     "SERVERLESS_PROJECT": "${project}",
     "SERVERLESS_STAGE": "${stage}",
-    "SERVERLESS_REGION": "${region}",
-    "MEMCACHIER_SERVERS": "${elastiCacheAddress}:${elastiCachePort}"
+    "SERVERLESS_REGION": "${region}"
   },
   "functionVpc": {
     "securityGroupIds": ["${lambdaExecSecurityGroup}"],
