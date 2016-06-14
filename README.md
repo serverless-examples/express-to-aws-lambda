@@ -15,9 +15,9 @@ Each branch has a different example.
 
 1. [Getting started - basic request and response](https://github.com/johncmckim/express-to-aws-lambda/tree/1-basic) - [Part 1](https://medium.com/@johncmckim/express-to-aws-lambda-part-1-a057096abe34)
 2. [Request Templates](https://github.com/johncmckim/express-to-aws-lambda/tree/2-request-templates) - [Part 2](https://medium.com/@johncmckim/express-to-aws-lambda-part-2-f5183389a3ec)
-3. [Response Templates](https://github.com/johncmckim/express-to-aws-lambda/tree/3-response-templates)
-4. [Authentication](https://github.com/johncmckim/express-to-aws-lambda/tree/4-authentication)
-5. Events - Coming Soon
+3. [Response Templates](https://github.com/johncmckim/express-to-aws-lambda/tree/3-response-templates) - [Part 3](https://medium.com/@johncmckim/express-to-aws-lambda-part-3-eca9a442f9ff)
+4. [Authentication](https://github.com/johncmckim/express-to-aws-lambda/tree/4-authentication) - [Part 4](https://medium.com/@johncmckim/express-to-aws-lambda-part-4-22257f71385f)
+5. [Events](https://github.com/johncmckim/express-to-aws-lambda/tree/5-workers) - [Part 5](https://medium.com/@johncmckim/express-to-aws-lambda-part-5-dcde1532279c)
 
 ## Reading
 If you want to dig deeper into AWS Lambda and Serverless. I recommend reading the documentation for both services.
