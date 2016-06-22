@@ -1,0 +1,9 @@
+
+{
+  "name": "express-to-aws-lambda",
+  "description": "Learning about apex",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::222685691406:role/express-to-aws-lambda_lambda_function",
+  "environment": {}
+}
