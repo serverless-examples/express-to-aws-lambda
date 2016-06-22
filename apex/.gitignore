@@ -1,3 +1,4 @@
 project.prod.json
 
 .terraform/
+*.tfstate*
