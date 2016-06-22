@@ -1,6 +1,7 @@
 {
   "name": "express-to-aws-lambda",
   "description": "Learning about apex",
+  "defaultEnvironment": "prod",
   "memory": 128,
   "timeout": 5,
   "environment": {}
