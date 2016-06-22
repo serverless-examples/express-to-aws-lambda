@@ -4,7 +4,7 @@
   "description": "Serverless Lambda function for project: express-to-aws-lambda",
   "customName": false,
   "customRole": false,
-  "handler": "handler.handler",
+  "handler": "foo/get/handler.handler",
   "timeout": 6,
   "memorySize": 1024,
   "authorizer": {},
