@@ -10,10 +10,10 @@
     "url": "git://github.com/"
   },
   "dependencies": {
-    "promise": "^7.1.1"
-  },
-  "devDependencies": {
+    "promise": "^7.1.1",
     "serverless-offline": "^2.6.1",
     "serverless-optimizer-plugin": "^2.5.1"
+  },
+  "devDependencies": {
   }
 }

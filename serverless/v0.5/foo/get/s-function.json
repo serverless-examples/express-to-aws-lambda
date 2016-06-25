@@ -9,6 +9,12 @@
   "memorySize": 1024,
   "authorizer": {},
   "custom": {
+    "optimize": {
+      "includePaths": [
+        "foo/get",
+        "foo/lib"
+      ]
+    },
     "excludePatterns": []
   },
   "endpoints": [
