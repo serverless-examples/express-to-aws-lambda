@@ -1,7 +1,6 @@
 {
   "name": "express-to-aws-lambda",
   "description": "Learning about apex",
-  "defaultEnvironment": "prod",
   "memory": 128,
   "timeout": 5,
   "role": "arn:aws:iam::222222222222:role/express-to-aws-lambda_lambda_function",
@@ -10,5 +9,6 @@
     "build": "../../node_modules/.bin/browserify --node -s default -t babelify -o main.js index.js",
     "clean": "rm -f main.js"
   },
-  "environment": {}
+  "environment": {},
+  "defaultEnvironment": "prod"
 }

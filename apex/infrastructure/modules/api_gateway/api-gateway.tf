@@ -11,10 +11,16 @@ resource "aws_api_gateway_resource" "foo_resource" {
   path_part = "foo"
 }
 
+resource "aws_api_gateway_resource" "foo_get_resource" {
+  rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
+  parent_id = "${aws_api_gateway_resource.foo_resource.id}"
+  path_part = "{id}"
+}
+
 # Method
 resource "aws_api_gateway_method" "get_foo_method" {
   rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
-  resource_id = "${aws_api_gateway_resource.foo_resource.id}"
+  resource_id = "${aws_api_gateway_resource.foo_get_resource.id}"
   http_method = "GET"
   authorization = "NONE"
 }
@@ -22,7 +28,7 @@ resource "aws_api_gateway_method" "get_foo_method" {
 # Method Response
 resource "aws_api_gateway_method_response" "get_foo_method200" {
   rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
-  resource_id = "${aws_api_gateway_resource.foo_resource.id}"
+  resource_id = "${aws_api_gateway_resource.foo_get_resource.id}"
   http_method = "${aws_api_gateway_method.get_foo_method.http_method}"
   status_code = "200"
 }
@@ -30,7 +36,7 @@ resource "aws_api_gateway_method_response" "get_foo_method200" {
 # Integration
 resource "aws_api_gateway_integration" "get_foo_integration" {
   rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
-  resource_id = "${aws_api_gateway_resource.foo_resource.id}"
+  resource_id = "${aws_api_gateway_resource.foo_get_resource.id}"
   http_method = "${aws_api_gateway_method.get_foo_method.http_method}"
   type = "AWS"                           # Documentation not clear
   integration_http_method = "GET"        # Not documented
@@ -43,7 +49,7 @@ resource "aws_api_gateway_integration" "get_foo_integration" {
 # Integration -> *Integration Response* -> Method Response -> Client
 resource "aws_api_gateway_integration_response" "KeysPUTIntegrationResponse" {
   rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
-  resource_id = "${aws_api_gateway_resource.foo_resource.id}"
+  resource_id = "${aws_api_gateway_resource.foo_get_resource.id}"
   http_method = "${aws_api_gateway_method.get_foo_method.http_method}"
   status_code = "${aws_api_gateway_method_response.get_foo_method200.status_code}"
 }

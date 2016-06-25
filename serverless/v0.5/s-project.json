@@ -1,7 +1,10 @@
 {
   "name": "express-to-aws-lambda",
-  "custom": {},
+  "custom": {
+    "optimize": true
+  },
   "plugins": [
+    "serverless-optimizer-plugin",
     "serverless-offline"
   ]
 }
