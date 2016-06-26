@@ -1,7 +1,5 @@
 {
   "http_method" : "$context.httpMethod",
   "id": "$input.params('id')",
-  "body": "$input.json('$')",
-  "pathParams" : "$input.params().path",
-  "queryParams" : "$input.params().querystring"
+  "body": $input.body
 }

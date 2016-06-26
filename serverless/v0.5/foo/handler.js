@@ -36,7 +36,6 @@ function put(event, context, cb) {
 }
 
 module.exports.crudFoo = function(event, context, cb) {
-
   switch(event.http_method) {
     case 'GET':
       get(event, context, cb);
@@ -50,5 +49,4 @@ module.exports.crudFoo = function(event, context, cb) {
     default:
       cb('Not implemented');
   }
-
 };

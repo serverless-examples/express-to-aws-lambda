@@ -4,14 +4,25 @@ import foo from './foo.js'
 console.log('starting function');
 
 export default function(event, context, cb) {
-  var id = event.id;
+  const callback = (err, result) => {
+    console.log('Sending result: ', err, result);
+    context.done(err, result);
+  };
 
-  foo
-    .get(id)
-    .then(function(foo) {
-      cb(null, foo);
-    })
-    .catch(function (err) {
-      cb(err);
-    });
+  switch(event.http_method) {
+    case 'GET':
+      foo.get(event.id, callback);
+      break;
+    case 'PUT':
+      foo.put(event.id, event.body.name, callback);
+      break;
+    case 'POST':
+      foo.post(event.body.name, callback);
+      break;
+    case 'DELETE':
+      foo.delete(event.id, callback);
+      break;
+    default:
+      context.fail('Not implemented');
+  }
 };

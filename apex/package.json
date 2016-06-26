@@ -7,9 +7,7 @@
   },
   "author": "John McKim",
   "license": "MIT",
-  "dependencies": {
-    "promise": "^7.1.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-plugin-syntax-async-functions": "^6.3.13",
     "babel-plugin-transform-async-to-generator": "^6.4.6",
