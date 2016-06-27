@@ -1,0 +1,7 @@
+#Apex
+project.*.json
+
+#Terraform
+.terraform
+*.tfstate
+*.tfstate.backup
