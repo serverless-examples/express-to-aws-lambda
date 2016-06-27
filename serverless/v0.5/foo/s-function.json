@@ -4,11 +4,16 @@
   "description": "Serverless Lambda function for project: express-to-aws-lambda",
   "customName": false,
   "customRole": false,
-  "handler": "handler.crudFoo",
+  "handler": "foo/handler.crudFoo",
   "timeout": 6,
-  "memorySize": 1024,
+  "memorySize": 128,
   "authorizer": {},
   "custom": {
+    "optimize": {
+      "includePaths": [
+        "foo/lib"
+      ]
+    },
     "excludePatterns": []
   },
   "endpoints": [

@@ -35,9 +35,11 @@ resource "aws_api_gateway_method_response" "foo_get_endpoint_method200" {
   response_models = {
     "application/json" = "Empty"
   }
-  response_parameters_in_json = {
-    "method.response.header.X-Frame-Options": "'DENY'"
+  response_parameters_in_json = <<PARAMS
+  {
+    "method.response.header.Location": true
   }
+PARAMS
 }
 
 # Integration
@@ -51,7 +53,7 @@ resource "aws_api_gateway_integration" "foo_get_endpoint_integration" {
   integration_http_method = "POST"
   uri = "arn:aws:apigateway:${var.aws_region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${var.aws_region}:${var.aws_account_id}:function:express-to-aws-lambda_foo/invocations"
   request_templates = {
-    "application/json" = "${file("${path.module}/api_gateway_request_mapping.template")}"
+    "application/json" = "${file("${path.module}/request_mapping.template")}"
   }
 }
 
@@ -81,9 +83,7 @@ resource "aws_api_gateway_method_response" "foo_post_endpoint_method200" {
   response_models = {
     "application/json" = "Empty"
   }
-  response_parameters_in_json = {
-    "method.response.header.X-Frame-Options": "'DENY'"
-  }
+  response_parameters_in_json = "${file("${path.module}/response_paramters.template")}"
 }
 
 # Integration
@@ -97,7 +97,7 @@ resource "aws_api_gateway_integration" "foo_post_endpoint_integration" {
   integration_http_method = "POST"
   uri = "arn:aws:apigateway:${var.aws_region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${var.aws_region}:${var.aws_account_id}:function:express-to-aws-lambda_foo/invocations"
   request_templates = {
-    "application/json" = "${file("${path.module}/api_gateway_request_mapping.template")}"
+    "application/json" = "${file("${path.module}/request_mapping.template")}"
   }
 }
 
@@ -127,9 +127,7 @@ resource "aws_api_gateway_method_response" "foo_put_endpoint_method200" {
   response_models = {
     "application/json" = "Empty"
   }
-  response_parameters_in_json = {
-    "method.response.header.X-Frame-Options": "'DENY'"
-  }
+  response_parameters_in_json = "${file("${path.module}/response_paramters.template")}"
 }
 
 # Integration
@@ -143,7 +141,7 @@ resource "aws_api_gateway_integration" "foo_put_endpoint_integration" {
   integration_http_method = "POST"
   uri = "arn:aws:apigateway:${var.aws_region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${var.aws_region}:${var.aws_account_id}:function:express-to-aws-lambda_foo/invocations"
   request_templates = {
-    "application/json" = "${file("${path.module}/api_gateway_request_mapping.template")}"
+    "application/json" = "${file("${path.module}/request_mapping.template")}"
   }
 }
 

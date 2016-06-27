@@ -14,5 +14,9 @@
     "memjs": "^0.10.0",
     "promise": "^7.1.1",
     "shortid": "^2.2.6"
+  },
+  "devDependencies": {
+    "serverless-offline": "^2.6.1",
+    "serverless-optimizer-plugin": "^2.5.1"
   }
 }
