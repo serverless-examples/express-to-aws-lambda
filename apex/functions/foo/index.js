@@ -19,9 +19,6 @@ export default function(event, context, cb) {
     case 'POST':
       foo.post(event.body.name, callback);
       break;
-    case 'DELETE':
-      foo.delete(event.id, callback);
-      break;
     default:
       context.fail('Not implemented');
   }

@@ -24,13 +24,5 @@ export default {
       name: name,
       type: 'created-foo'
     });
-  },
-  delete(id, cb) {
-    console.log('DELETE', id);
-
-    cb(null, {
-      id: id,
-      type: 'deleted-foo'
-    });
   }
 }

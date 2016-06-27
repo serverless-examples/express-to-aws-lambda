@@ -8,10 +8,6 @@ variable "stage" {
 	default = "prod"
 }
 
-variable "api_name" {
-	default = "foo_api"
-}
-
 variable "api_stage" {
 	default = "prod"
 }

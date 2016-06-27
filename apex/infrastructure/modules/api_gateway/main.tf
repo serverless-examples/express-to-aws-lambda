@@ -1,6 +1,6 @@
 
 resource "aws_api_gateway_rest_api" "foo_api" {
-  name = "${var.api_name}"
+  name = "foo_api"
   description = "This is my api gateway"
 }
 
@@ -18,62 +18,143 @@ resource "aws_api_gateway_resource" "foo_id_resource" {
   path_part = "{id}"
 }
 
-module "foo_get_endpoint" {
-  source = "../api_gateway_endpoint"
-  stage_name = "${var.api_stage}"
-
-  api_gateway_aws_account_id = "${var.aws_account_id}"
-  api_gateway_aws_region = "${var.aws_region}"
-  api_gateway_invoke_lambda_role_arn = "${var.gateway_invoke_lambda_role_arn}"
-
+# Method
+resource "aws_api_gateway_method" "foo_get_endpoint_method" {
   rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
   resource_id = "${aws_api_gateway_resource.foo_id_resource.id}"
-
   http_method = "GET"
-  lambda_function_name = "express-to-aws-lambda_foo"
+  authorization = "NONE"
 }
 
-module "foo_post_endpoint" {
-  source = "../api_gateway_endpoint"
-  stage_name = "${var.api_stage}"
+# Method Response
+resource "aws_api_gateway_method_response" "foo_get_endpoint_method200" {
+  rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
+  resource_id = "${aws_api_gateway_resource.foo_id_resource.id}"
+  http_method = "${aws_api_gateway_method.foo_get_endpoint_method.http_method}"
+  status_code = "200"
+  response_models = {
+    "application/json" = "Empty"
+  }
+}
 
-  api_gateway_aws_account_id = "${var.aws_account_id}"
-  api_gateway_aws_region = "${var.aws_region}"
-  api_gateway_invoke_lambda_role_arn = "${var.gateway_invoke_lambda_role_arn}"
+# Integration
+resource "aws_api_gateway_integration" "foo_get_endpoint_integration" {
+  rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
+  resource_id = "${aws_api_gateway_resource.foo_id_resource.id}"
+  http_method = "${aws_api_gateway_method.foo_get_endpoint_method.http_method}"
+  type = "AWS"
+  credentials = "${var.gateway_invoke_lambda_role_arn}"
+  # Must be POST for invoking Lambda function
+  integration_http_method = "POST"
+  uri = "arn:aws:apigateway:${var.aws_region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${var.aws_region}:${var.aws_account_id}:function:express-to-aws-lambda_foo/invocations"
+  request_templates = {
+    "application/json" = "${file("${path.module}/api_gateway_body_mapping.template")}"
+  }
+}
 
+# Integration -> *Integration Response* -> Method Response -> Client
+resource "aws_api_gateway_integration_response" "foo_get_endpoint_integration_response" {
+  rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
+  resource_id = "${aws_api_gateway_resource.foo_id_resource.id}"
+  http_method = "${aws_api_gateway_method.foo_get_endpoint_method.http_method}"
+  status_code = "${aws_api_gateway_method_response.foo_get_endpoint_method200.status_code}"
+}
+
+# POST Method
+# Method
+resource "aws_api_gateway_method" "foo_post_endpoint_method" {
   rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
   resource_id = "${aws_api_gateway_resource.foo_resource.id}"
-
   http_method = "POST"
-  lambda_function_name = "express-to-aws-lambda_foo"
+  authorization = "NONE"
 }
 
-module "foo_put_endpoint" {
-  source = "../api_gateway_endpoint"
-  stage_name = "${var.api_stage}"
+# Method Response
+resource "aws_api_gateway_method_response" "foo_post_endpoint_method200" {
+  rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
+  resource_id = "${aws_api_gateway_resource.foo_resource.id}"
+  http_method = "${aws_api_gateway_method.foo_post_endpoint_method.http_method}"
+  status_code = "200"
+  response_models = {
+    "application/json" = "Empty"
+  }
+}
 
-  api_gateway_aws_account_id = "${var.aws_account_id}"
-  api_gateway_aws_region = "${var.aws_region}"
-  api_gateway_invoke_lambda_role_arn = "${var.gateway_invoke_lambda_role_arn}"
+# Integration
+resource "aws_api_gateway_integration" "foo_post_endpoint_integration" {
+  rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
+  resource_id = "${aws_api_gateway_resource.foo_resource.id}"
+  http_method = "${aws_api_gateway_method.foo_post_endpoint_method.http_method}"
+  type = "AWS"
+  credentials = "${var.gateway_invoke_lambda_role_arn}"
+  # Must be POST for invoking Lambda function
+  integration_http_method = "POST"
+  uri = "arn:aws:apigateway:${var.aws_region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${var.aws_region}:${var.aws_account_id}:function:express-to-aws-lambda_foo/invocations"
+  request_templates = {
+    "application/json" = "${file("${path.module}/api_gateway_body_mapping.template")}"
+  }
+}
 
+# Integration -> *Integration Response* -> Method Response -> Client
+resource "aws_api_gateway_integration_response" "foo_post_endpoint_integration_response" {
+  rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
+  resource_id = "${aws_api_gateway_resource.foo_resource.id}"
+  http_method = "${aws_api_gateway_method.foo_post_endpoint_method.http_method}"
+  status_code = "${aws_api_gateway_method_response.foo_post_endpoint_method200.status_code}"
+}
+
+# PUT Method
+# Method
+resource "aws_api_gateway_method" "foo_put_endpoint_method" {
   rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
   resource_id = "${aws_api_gateway_resource.foo_id_resource.id}"
-
   http_method = "PUT"
-  lambda_function_name = "express-to-aws-lambda_foo"
+  authorization = "NONE"
 }
 
-module "foo_delete_endpoint" {
-  source = "../api_gateway_endpoint"
-  stage_name = "${var.api_stage}"
-
-  api_gateway_aws_account_id = "${var.aws_account_id}"
-  api_gateway_aws_region = "${var.aws_region}"
-  api_gateway_invoke_lambda_role_arn = "${var.gateway_invoke_lambda_role_arn}"
-
+# Method Response
+resource "aws_api_gateway_method_response" "foo_put_endpoint_method200" {
   rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
   resource_id = "${aws_api_gateway_resource.foo_id_resource.id}"
+  http_method = "${aws_api_gateway_method.foo_put_endpoint_method.http_method}"
+  status_code = "200"
+  response_models = {
+    "application/json" = "Empty"
+  }
+}
 
-  http_method = "DELETE"
-  lambda_function_name = "express-to-aws-lambda_foo"
+# Integration
+resource "aws_api_gateway_integration" "foo_put_endpoint_integration" {
+  rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
+  resource_id = "${aws_api_gateway_resource.foo_id_resource.id}"
+  http_method = "${aws_api_gateway_method.foo_put_endpoint_method.http_method}"
+  type = "AWS"
+  credentials = "${var.gateway_invoke_lambda_role_arn}"
+  # Must be POST for invoking Lambda function
+  integration_http_method = "POST"
+  uri = "arn:aws:apigateway:${var.aws_region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${var.aws_region}:${var.aws_account_id}:function:express-to-aws-lambda_foo/invocations"
+  request_templates = {
+    "application/json" = "${file("${path.module}/api_gateway_body_mapping.template")}"
+  }
+}
+
+# Integration -> *Integration Response* -> Method Response -> Client
+resource "aws_api_gateway_integration_response" "foo_put_endpoint_integration_response" {
+  rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
+  resource_id = "${aws_api_gateway_resource.foo_id_resource.id}"
+  http_method = "${aws_api_gateway_method.foo_put_endpoint_method.http_method}"
+  status_code = "${aws_api_gateway_method_response.foo_put_endpoint_method200.status_code}"
+}
+
+resource "aws_api_gateway_deployment" "deployment" {
+  depends_on=[
+    "aws_api_gateway_integration.foo_get_endpoint_integration",
+    "aws_api_gateway_integration.foo_post_endpoint_integration",
+    "aws_api_gateway_integration.foo_put_endpoint_integration"
+  ]
+  rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
+  stage_name = "${var.api_stage}"
+  variables = {
+    "functionAlias" = "${var.api_stage}"
+  }
 }
