@@ -6,7 +6,7 @@
   "role": "arn:aws:iam::222222222222:role/express-to-aws-lambda_lambda_function",
   "handler": "main.default",
   "hooks": {
-    "build": "../../node_modules/.bin/browserify --node -s default -t babelify -o main.js index.js",
+    "build": "../../node_modules/browserify/bin/cmd.js --node -s default -t babelify -o main.js index.js",
     "clean": "rm -f main.js"
   },
   "environment": {},

@@ -63,6 +63,11 @@ resource "aws_api_gateway_integration_response" "foo_get_endpoint_integration_re
   resource_id = "${aws_api_gateway_resource.foo_id_resource.id}"
   http_method = "${aws_api_gateway_method.foo_get_endpoint_method.http_method}"
   status_code = "${aws_api_gateway_method_response.foo_get_endpoint_method200.status_code}"
+  response_parameters_in_json = <<PARAMS
+  {
+    "method.response.header.Location": "integration.response.body.location"
+  }
+PARAMS
 }
 
 # POST Method
@@ -83,7 +88,6 @@ resource "aws_api_gateway_method_response" "foo_post_endpoint_method200" {
   response_models = {
     "application/json" = "Empty"
   }
-  response_parameters_in_json = "${file("${path.module}/response_paramters.template")}"
 }
 
 # Integration
@@ -127,7 +131,6 @@ resource "aws_api_gateway_method_response" "foo_put_endpoint_method200" {
   response_models = {
     "application/json" = "Empty"
   }
-  response_parameters_in_json = "${file("${path.module}/response_paramters.template")}"
 }
 
 # Integration
