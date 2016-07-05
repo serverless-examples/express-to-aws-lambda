@@ -1,0 +1,16 @@
+{
+  "name": "express-to-aws-lambda",
+  "description": "Learning about apex",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::222222222222:role/lambda_function",
+  "handler": "main.default",
+  "hooks": {
+    "build": "../../node_modules/browserify/bin/cmd.js --node --external aws-sdk -s default -t babelify -o main.js index.js",
+    "clean": "rm -f main.js"
+  },
+  "environment": {
+    "WORKER_SNS_TOPIC_ARN": "arn:aws:sns:us-east-1:222222222222:jobs_worker_topic"
+  },
+  "defaultEnvironment": "prod"
+}
