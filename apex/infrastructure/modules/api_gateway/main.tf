@@ -4,6 +4,13 @@ resource "aws_api_gateway_rest_api" "foo_api" {
   description = "This is my api gateway"
 }
 
+resource "aws_api_gateway_authorizer" "foo_authorizer" {
+  name = "foo_authorizer"
+  rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"
+  authorizer_uri = "arn:aws:apigateway:${var.aws_region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${var.aws_region}:${var.aws_account_id}:function:express-to-aws-lambda_auth/invocations"
+  authorizer_credentials = "${var.gateway_invoke_lambda_role_arn}"
+}
+
 # Resource
 resource "aws_api_gateway_resource" "foo_resource" {
   rest_api_id = "${aws_api_gateway_rest_api.foo_api.id}"

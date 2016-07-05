@@ -24,7 +24,7 @@ export default function(event, context, callback) {
   apiOptions.stage = apiGatewayArnTmp[1];
 
   console.log('Building with policy with: ', awsAccountId, apiOptions)
-  var policy = new AuthPolicy(verifiedJwt.username, awsAccountId, apiOptions);
+  var policy = new AuthPolicy(event.authorizationToken, awsAccountId, apiOptions);
 
   policy.allowAllMethods();
   // Or define subset based on scop - verifiedJwt.body.scope
