@@ -21,11 +21,11 @@ Each branch has a different example. There are complete examples for the [Server
 5. [Events](https://github.com/johncmckim/express-to-aws-lambda/tree/5-workers) - [Part 5](https://medium.com/@johncmckim/express-to-aws-lambda-part-5-dcde1532279c)
 
 ### Apex
-1. [Getting started - basic request and response](https://github.com/johncmckim/express-to-aws-lambda/tree/1-basic) - TODO
-2. [Request Templates](https://github.com/johncmckim/express-to-aws-lambda/tree/2-request-templates) - TODO
-3. [Response Templates](https://github.com/johncmckim/express-to-aws-lambda/tree/3-response-templates) - TODO
-4. [Authentication](https://github.com/johncmckim/express-to-aws-lambda/tree/4-authentication) - TODO
-5. [Events](https://github.com/johncmckim/express-to-aws-lambda/tree/5-workers) - TODO
+1. [Getting started - basic request and response](https://github.com/johncmckim/express-to-aws-lambda/tree/1-basic) - [Part 1](https://serverless.zone/express-to-aws-lambda-apex-edition-part-1-bcc11102feeb)
+2. [Request Templates](https://github.com/johncmckim/express-to-aws-lambda/tree/2-request-templates) - [Part 2](https://serverless.zone/express-to-aws-lambda-apex-edition-part-2-53405a867b12)
+3. [Response Templates](https://github.com/johncmckim/express-to-aws-lambda/tree/3-response-templates) - [Part 2](https://serverless.zone/express-to-aws-lambda-apex-edition-part-2-53405a867b12)
+4. [Authentication](https://github.com/johncmckim/express-to-aws-lambda/tree/4-authentication) - [Part 3](https://serverless.zone/express-to-aws-lambda-apex-edition-part-3-559e25b2e813)
+5. [Events](https://github.com/johncmckim/express-to-aws-lambda/tree/5-workers) - [Part 3](https://serverless.zone/express-to-aws-lambda-apex-edition-part-3-559e25b2e813)
 
 
 

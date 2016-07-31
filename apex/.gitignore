@@ -1,0 +1,5 @@
+project.prod.json
+
+.terraform
+*.tfstate
+*.tfstate.backup
