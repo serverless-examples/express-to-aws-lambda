@@ -2,18 +2,16 @@
 ## What is this?
 This repo provides examples of [AWS Lambda](https://aws.amazon.com/lambda/) apps using the [Serverless Framework](http://serverless.com/) and [Apex Framework](http://apex.run/). It contains basic Nodejs apps that use Express framework and the equivalent app on [AWS Lambda](https://aws.amazon.com/lambda/).
 
-### In this branch
-This branch looks at getting started with the [Serverless Framework](https://github.com/serverless/serverless). Please read the associated [blog post](https://medium.com/@johncmckim/express-to-aws-lambda-part-1-a057096abe34) for an explanation.
-
 ## Why
 AWS Lambda and other compute services (Google Cloud Functions, Azure Functions, ect), are playing an increasingly more important role in Application Architecture.
 
 When I first looked at AWS Lambda it was very unclear to me how to structure and deploy a Lambda based application. I'm hoping these examples will help others that want to learn more about AWS Lambda.
 
 ## Examples
-Each branch has a different example. There are complete examples for the [Serverless Framework](http://serverless.com/). Examples for [Apex](http://apex.run/) are in progress.
+Each branch has a different example. There are complete examples for the [Serverless Framework](http://serverless.com/) and  [Apex Framework](http://apex.run/).
 
 ### Serverless
+#### Version 0.5
 1. [Getting started - basic request and response](https://github.com/johncmckim/express-to-aws-lambda/tree/1-basic) - [Part 1](https://medium.com/@johncmckim/express-to-aws-lambda-part-1-a057096abe34)
 2. [Request Templates](https://github.com/johncmckim/express-to-aws-lambda/tree/2-request-templates) - [Part 2](https://medium.com/@johncmckim/express-to-aws-lambda-part-2-f5183389a3ec)
 3. [Response Templates](https://github.com/johncmckim/express-to-aws-lambda/tree/3-response-templates) - [Part 3](https://medium.com/@johncmckim/express-to-aws-lambda-part-3-eca9a442f9ff)
